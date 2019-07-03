@@ -1,0 +1,8 @@
+{
+    "name": "meteo",
+    "version": 2,
+    "builds": [{ "src": "**/*.js", "use": "@now/node" }],
+    "env": {
+      "DB_URI": "@db-uri"
+    }
+  }
