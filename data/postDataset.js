@@ -17,7 +17,8 @@ async function connectToDatabase(uri) {
 module.exports = async (req, res) => {
    const db = await connectToDatabase(process.env.DB_URI)
    const collection = await db.collection('datasets')
-   console.log(req.body)
-   const saved = await collection.insertOne(req.body)
+   let dataset = req.body
+   if (!dataset.created) dataset.created = new Date()
+   const saved = await collection.insertOne(dataset)
    res.status(200).json( saved )
 }
