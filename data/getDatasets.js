@@ -15,8 +15,17 @@ async function connectToDatabase(uri) {
 }
 
 module.exports = async (req, res) => {
+  const page = +req.query.page || 1
+  const perPage = +req.query.perPage || 20
   const db = await connectToDatabase(process.env.DB_URI)
   const collection = await db.collection('datasets')
-  const meteos = await collection.find({}).toArray()
-  res.status(200).json( meteos )
+  const datasets = await collection.find({}).skip(page * perPage - perPage).limit(perPage).toArray()
+  const count = await collection.find({}).count()
+  let result = {}
+  result.page = page
+  result.perPage = perPage
+  result.count = count
+  result.pages = Math.ceil(count / perPage)
+  result.datasets = datasets
+  res.status(200).json(result)
 }
