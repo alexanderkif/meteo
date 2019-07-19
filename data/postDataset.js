@@ -1,5 +1,5 @@
 
-var connectToDatabase = require('./configDb')
+const connectToDatabase = require('./configDb')
 
 module.exports = async (req, res) => {
    const db = await connectToDatabase(process.env.DB_URI)

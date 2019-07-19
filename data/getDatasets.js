@@ -1,5 +1,5 @@
 
-var connectToDatabase = require('./configDb')
+const connectToDatabase = require('./configDb')
 
 const MAX_RANGE = 30 * 24 * 60 * 60 * 1000
 
@@ -8,8 +8,8 @@ module.exports = async (req, res) => {
   const finish = req.query.finish ? new Date(req.query.finish) : new Date()
   // const page = +req.query.page || 1
   // const perPage = +req.query.perPage || 25
-  console.log(start)
-  console.log(finish)
+  // console.log(start)
+  // console.log(finish)
 
   if (finish - start > MAX_RANGE) {
     res.status(200).json({'result': 'Error. Too large range'})

@@ -1,4 +1,9 @@
 
+const connectToDatabase = require('./data/configDb')
+
 module.exports = async (req, res) => {
-  res.status(200).json({'api': '/data?start=START_DATE&finish=FINISH_DATE'})
+  const db = await connectToDatabase(process.env.DB_URI)
+  const collection = await db.collection('datasets')
+  const datasets = await collection.find().sort({'created': -1}).limit(1).toArray()    
+  res.status(200).json({'lastDataset': datasets[0]})
 }
