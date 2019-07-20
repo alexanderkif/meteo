@@ -1,9 +1,12 @@
 
 const connectToDatabase = require('./configDb')
+const microCors = require('micro-cors')
+
+const cors = microCors({ allowMethods: ['GET'] })
 
 const MAX_RANGE = 30 * 24 * 60 * 60 * 1000
 
-module.exports = async (req, res) => {
+const handler = async (req, res) => {
   const start = req.query.start ? new Date(req.query.start) : new Date(new Date() - 3 * 60 * 60 * 1000)
   const finish = req.query.finish ? new Date(req.query.finish) : new Date()
   // const page = +req.query.page || 1
@@ -33,3 +36,5 @@ module.exports = async (req, res) => {
     res.status(200).json(result)
   }
 }
+
+module.exports = cors(handler)
