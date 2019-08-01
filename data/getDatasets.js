@@ -343,8 +343,8 @@ const handler = async (req, res) => {
   }
   
   let result = {}
-  result.start = datasets[0].id
-  result.finish = datasets[datasets.length - 1].id
+  result.start = datasets[0]._id
+  result.finish = datasets[datasets.length - 1]._id
   result.count = datasets.length
   result.datasets = datasets
   res.status(200).json(result)
