@@ -25,6 +25,44 @@ const handler = async (req, res) => {
   const db = await connectToDatabase(process.env.DB_URI)
   const collection = await db.collection('datasets')
   let datasets = null
+  const MATCH_FROM_TO = {
+    '$match' : {
+      'created': { '$gte': start, '$lte': finish }
+    }
+  }
+  const TEMP_VALUE = {
+    '$avg': {
+      '$convert': {
+        'input': '$temperature', 
+        'to': 'double'
+      }
+    }
+  }
+  const HUM_VALUE = {
+    '$avg': {
+      '$convert': {
+        'input': '$humidity', 
+        'to': 'double'
+      }
+    }
+  }
+  const PRESS_VALUE = {
+    '$avg': {
+      '$convert': {
+        'input': '$pressure', 
+        'to': 'double'
+      }
+    }
+  }
+  const ALT_VALUE = {
+    '$avg': {
+      '$convert': {
+        'input': '$altitude', 
+        'to': 'double'
+      }
+    }
+  }  
+  const SORT_1 = { '$sort': { '_id': 1 } }
 
   if (finish - start <= MAX_AVG_1) {
     let EVERY_M_MINITS = 5
@@ -32,11 +70,7 @@ const handler = async (req, res) => {
 
     datasets = await collection.aggregate(
       [
-        {
-          '$match' : {
-            'created': { '$gte': start, '$lte': finish }
-          }
-        },
+        MATCH_FROM_TO,
         {
           '$project': {
             'temperature': 1, 
@@ -77,44 +111,13 @@ const handler = async (req, res) => {
                 }
               }
             }, 
-            'temperature': {
-              '$avg': {
-                '$convert': {
-                  'input': '$temperature', 
-                  'to': 'double'
-                }
-              }
-            }, 
-            'humidity': {
-              '$avg': {
-                '$convert': {
-                  'input': '$humidity', 
-                  'to': 'double'
-                }
-              }
-            }, 
-            'pressure': {
-              '$avg': {
-                '$convert': {
-                  'input': '$pressure', 
-                  'to': 'double'
-                }
-              }
-            }, 
-            'altitude': {
-              '$avg': {
-                '$convert': {
-                  'input': '$altitude', 
-                  'to': 'double'
-                }
-              }
-            }
+            'temperature': TEMP_VALUE, 
+            'humidity': HUM_VALUE, 
+            'pressure': PRESS_VALUE, 
+            'altitude': ALT_VALUE
           }
-        }, {
-          '$sort': {
-            '_id': 1
-          }
-        }
+        },
+        SORT_1
       ]
     ).toArray()
   }
@@ -122,11 +125,7 @@ const handler = async (req, res) => {
   else if (finish - start <= MAX_AVG_2) {
     datasets = await collection.aggregate(
       [
-        {
-          '$match' : {
-            'created': { '$gte': start, '$lte': finish }
-          }
-        },
+        MATCH_FROM_TO,
         {
           '$group': {
             '_id': {
@@ -145,44 +144,13 @@ const handler = async (req, res) => {
                 }
               }
             }, 
-            'temperature': {
-              '$avg': {
-                '$convert': {
-                  'input': '$temperature', 
-                  'to': 'double'
-                }
-              }
-            }, 
-            'humidity': {
-              '$avg': {
-                '$convert': {
-                  'input': '$humidity', 
-                  'to': 'double'
-                }
-              }
-            }, 
-            'pressure': {
-              '$avg': {
-                '$convert': {
-                  'input': '$pressure', 
-                  'to': 'double'
-                }
-              }
-            }, 
-            'altitude': {
-              '$avg': {
-                '$convert': {
-                  'input': '$altitude', 
-                  'to': 'double'
-                }
-              }
-            }
+            'temperature': TEMP_VALUE, 
+            'humidity': HUM_VALUE, 
+            'pressure': PRESS_VALUE, 
+            'altitude': ALT_VALUE
           }
-        }, {
-          '$sort': {
-            '_id': 1
-          }
-        }
+        },
+        SORT_1
       ]
     ).toArray()
   }
@@ -193,11 +161,7 @@ const handler = async (req, res) => {
 
     datasets = await collection.aggregate(
       [
-        {
-          '$match' : {
-            'created': { '$gte': start, '$lte': finish }
-          }
-        },
+        MATCH_FROM_TO,
         {
           '$project': {
             'temperature': 1, 
@@ -235,44 +199,13 @@ const handler = async (req, res) => {
                 }
               }
             }, 
-            'temperature': {
-              '$avg': {
-                '$convert': {
-                  'input': '$temperature', 
-                  'to': 'double'
-                }
-              }
-            }, 
-            'humidity': {
-              '$avg': {
-                '$convert': {
-                  'input': '$humidity', 
-                  'to': 'double'
-                }
-              }
-            }, 
-            'pressure': {
-              '$avg': {
-                '$convert': {
-                  'input': '$pressure', 
-                  'to': 'double'
-                }
-              }
-            }, 
-            'altitude': {
-              '$avg': {
-                '$convert': {
-                  'input': '$altitude', 
-                  'to': 'double'
-                }
-              }
-            }
+            'temperature': TEMP_VALUE, 
+            'humidity': HUM_VALUE, 
+            'pressure': PRESS_VALUE, 
+            'altitude': ALT_VALUE
           }
-        }, {
-          '$sort': {
-            '_id': 1
-          }
-        }
+        },
+        SORT_1
       ]
     ).toArray()
   }
@@ -280,11 +213,7 @@ const handler = async (req, res) => {
   else {
     datasets = await collection.aggregate(
       [
-        {
-          '$match' : {
-            'created': { '$gte': start, '$lte': finish }
-          }
-        },
+        MATCH_FROM_TO,
         {
           '$group': {
             '_id': {
@@ -300,51 +229,20 @@ const handler = async (req, res) => {
                 }
               }
             }, 
-            'temperature': {
-              '$avg': {
-                '$convert': {
-                  'input': '$temperature', 
-                  'to': 'double'
-                }
-              }
-            }, 
-            'humidity': {
-              '$avg': {
-                '$convert': {
-                  'input': '$humidity', 
-                  'to': 'double'
-                }
-              }
-            }, 
-            'pressure': {
-              '$avg': {
-                '$convert': {
-                  'input': '$pressure', 
-                  'to': 'double'
-                }
-              }
-            }, 
-            'altitude': {
-              '$avg': {
-                '$convert': {
-                  'input': '$altitude', 
-                  'to': 'double'
-                }
-              }
-            }
+            'temperature': TEMP_VALUE, 
+            'humidity': HUM_VALUE, 
+            'pressure': PRESS_VALUE, 
+            'altitude': ALT_VALUE
           }
-        }, {
-          '$sort': {
-            '_id': 1
-          }
-        }
+        },
+        SORT_1
       ]
     ).toArray()
   }
   
   let result = {}
-  result.start = start
-  result.finish = finish
+  result.start = datasets[0]._id
+  result.finish = datasets[datasets.length - 1]._id
   result.count = datasets.length
   result.datasets = datasets
   res.status(200).json(result)
