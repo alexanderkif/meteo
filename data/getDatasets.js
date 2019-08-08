@@ -239,12 +239,18 @@ const handler = async (req, res) => {
       ]
     ).toArray()
   }
-  
+
+  if (!datasets.length) {
+    res.status(200).json({'result': 'There are no data sets for this range.'})
+    return
+  }
+
   let result = {}
   result.start = datasets[0]._id
   result.finish = datasets[datasets.length - 1]._id
   result.count = datasets.length
   result.datasets = datasets
+  console.log(result)
   res.status(200).json(result)
 }
 
