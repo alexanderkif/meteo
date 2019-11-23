@@ -9,6 +9,7 @@ module.exports = async (req, res) => {
    dataset.humidity = req.body.humidity
    dataset.pressure = req.body.pressure
    dataset.altitude = req.body.altitude
+   dataset.battery = req.body.battery
    if (!dataset.created) dataset.created = new Date()
    if (dataset.temperature && dataset.humidity && dataset.pressure) {
       const result = await collection.insertOne(dataset)

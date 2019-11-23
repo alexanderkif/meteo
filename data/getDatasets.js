@@ -61,7 +61,15 @@ const handler = async (req, res) => {
         'to': 'double'
       }
     }
-  }  
+  }
+  const BAT_VALUE = {
+    '$avg': {
+      '$convert': {
+        'input': '$battery', 
+        'to': 'double'
+      }
+    }
+  } 
   const SORT_1 = { '$sort': { '_id': 1 } }
 
   if (finish - start <= MAX_AVG_1) {
@@ -114,7 +122,8 @@ const handler = async (req, res) => {
             'temperature': TEMP_VALUE, 
             'humidity': HUM_VALUE, 
             'pressure': PRESS_VALUE, 
-            'altitude': ALT_VALUE
+            'altitude': ALT_VALUE,
+            'battery': BAT_VALUE
           }
         },
         SORT_1
@@ -147,7 +156,8 @@ const handler = async (req, res) => {
             'temperature': TEMP_VALUE, 
             'humidity': HUM_VALUE, 
             'pressure': PRESS_VALUE, 
-            'altitude': ALT_VALUE
+            'altitude': ALT_VALUE,
+            'battery': BAT_VALUE
           }
         },
         SORT_1
@@ -202,7 +212,8 @@ const handler = async (req, res) => {
             'temperature': TEMP_VALUE, 
             'humidity': HUM_VALUE, 
             'pressure': PRESS_VALUE, 
-            'altitude': ALT_VALUE
+            'altitude': ALT_VALUE,
+            'battery': BAT_VALUE
           }
         },
         SORT_1
@@ -232,7 +243,8 @@ const handler = async (req, res) => {
             'temperature': TEMP_VALUE, 
             'humidity': HUM_VALUE, 
             'pressure': PRESS_VALUE, 
-            'altitude': ALT_VALUE
+            'altitude': ALT_VALUE,
+            'battery': BAT_VALUE
           }
         },
         SORT_1
