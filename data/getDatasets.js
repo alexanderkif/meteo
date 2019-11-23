@@ -84,7 +84,8 @@ const handler = async (req, res) => {
             'temperature': 1, 
             'humidity': 1, 
             'pressure': 1, 
-            'altitude': 1, 
+            'altitude': 1,
+            'battery': 1,
             'created': 1, 
             'M': {
               '$floor': {
@@ -177,7 +178,8 @@ const handler = async (req, res) => {
             'temperature': 1, 
             'humidity': 1, 
             'pressure': 1, 
-            'altitude': 1, 
+            'altitude': 1,
+            'battery': 1, 
             'created': 1, 
             'H': {
               '$floor': {
