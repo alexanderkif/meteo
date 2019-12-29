@@ -25,17 +25,28 @@ module.exports = async (req, res) => {
          res.status(400).send('No object with this id.')
          return
       }
-      dataset._id = ObjectId(req.body.id)
+
       dataset.created = new Date(req.body.created)
+
+      try {
+         await collection.updateOne(
+            {_id: ObjectId(req.body.id)},
+            { $set: dataset }
+         )
+         dataset._id = ObjectId(req.body.id)
+         res.status(200).json( dataset )
+      } catch (error) {
+         res.status(400).send( error )
+      }
    } else {
       // insert
       dataset.created = new Date()
-   }
 
-   try {
-      const result = await collection.save(dataset)
-      res.status(200).json( result.ops ? result.ops[0] : dataset )
-   } catch (error) {
-      res.status(400).send( error )
+      try {
+         const result = await collection.insertOne(dataset)
+         res.status(200).json( result.ops[0] )
+      } catch (error) {
+         res.status(400).send( error )
+      }
    }
 }
