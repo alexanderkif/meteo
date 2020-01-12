@@ -1,12 +1,10 @@
 {
   "name": "meteo",
   "version": 2,
-  "builds": [{ "src": "**/*.js", "use": "@now/node@0.11.1" }],
+  "builds": [{ "src": "**/*.js", "use": "@now/node" }],
   "routes": [
     { "src": "/data", "methods": ["GET"], "dest": "data/getDatasets.js" },
-    { "src": "/data/", "methods": ["GET"], "dest": "data/getDatasets.js" },
     { "src": "/data", "methods": ["POST"], "dest": "data/postDataset.js" },
-    { "src": "/data/", "methods": ["POST"], "dest": "data/postDataset.js" },
     { "src": "/", "dest": "/index.js" }
   ],
   "env": {

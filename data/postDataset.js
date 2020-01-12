@@ -5,7 +5,7 @@ const ObjectId = require('mongodb').ObjectID;
 module.exports = async (req, res) => {
 
    if (req.body.key != 'mySuperKey') {
-      res.status(400).send('Access denied')
+      res.status(400).send('Access denied.')
       return
    }
 
