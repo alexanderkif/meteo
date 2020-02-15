@@ -15,6 +15,7 @@ module.exports = async (req, res) => {
    dataset.pressure = +req.body.pressure
    dataset.altitude = +req.body.altitude
    dataset.battery = +req.body.battery
+   dataset.sp = +req.body.sp
    
    const db = await connectToDatabase(process.env.DB_URI)
    const collection = await db.collection('datasets')
