@@ -51,7 +51,8 @@ const handler = async (req, res) => {
           'humidity': 1, 
           'pressure': 1, 
           'altitude': 1, 
-          'battery': 1, 
+          'battery': 1,
+          'sp': 1,
           'created': 1, 
           'range': {
             '$switch': {
@@ -256,6 +257,14 @@ const handler = async (req, res) => {
             '$avg': {
               '$convert': {
                 'input': '$battery', 
+                'to': 'double'
+              }
+            }
+          }, 
+          'sp': {
+            '$avg': {
+              '$convert': {
+                'input': '$sp', 
                 'to': 'double'
               }
             }
