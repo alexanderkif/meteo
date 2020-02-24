@@ -17,10 +17,10 @@
 <img src="backend.svg">
 
 ## Wemos/Arduino circuitry
-<img src="scema4.png">
+<img src="scema5.png">
 
 ### How arduino works
-<img src="arduino.svg">
+<img src="arduino1.svg">
 
 ## Arduino IDE sketch
 ### https://github.com/alexanderkif/meteo/blob/master/arduino/MeteoBasicHttpsClient.ino
