@@ -1,4 +1,6 @@
 # Meteo API
+## How it works
+### https://alexanderkif.github.io/dometeo/
 ## Deployed on zeit.co
 ### https://zeit.co/docs
 ### GET
