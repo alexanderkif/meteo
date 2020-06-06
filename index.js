@@ -2,7 +2,7 @@
 const connectToDatabase = require('./data/configDb')
 const microCors = require('micro-cors')
 
-const cors = microCors({ allowMethods: ['GET'] })
+const cors = microCors({ allowMethods: ['GET','POST'] })
 
 const handler = async (req, res) => {
   const db = await connectToDatabase(process.env.DB_URI)
