@@ -1,8 +1,8 @@
 
 const connectToDatabase = require('./data/configDb')
-const microCors = require('micro-cors')
+// const microCors = require('micro-cors')
 
-const cors = microCors({ allowMethods: ['GET','OPTIONS'] })
+// const cors = microCors({ allowMethods: ['GET','OPTIONS'] })
 // const allowCors = fn => async (req, res) => {
 //   res.setHeader('Access-Control-Allow-Credentials', true)
 //   res.setHeader('Access-Control-Allow-Origin', '*')
@@ -27,5 +27,6 @@ const handler = async (req, res) => {
   res.status(200).json({'lastDataset': datasets[0]})
 }
 
-module.exports = cors(handler)
+module.exports = handler
+// module.exports = cors(handler)
 // module.exports = allowCors(handler)

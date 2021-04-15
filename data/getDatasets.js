@@ -1,28 +1,28 @@
 
 const connectToDatabase = require('./configDb')
-const microCors = require('micro-cors')
+// const microCors = require('micro-cors')
 
 const MAX_POINTS_TO_DISPLAY = 73
 const TFRAME_DEFAULT = 'minute'
 const STEP_DEFAULT = 5
 
-const cors = microCors({ allowMethods: ['GET'] })
-// const allowCors = fn => async (req, res) => {
-//   res.setHeader('Access-Control-Allow-Credentials', true)
-//   res.setHeader('Access-Control-Allow-Origin', '*')
-//   // another common pattern
-//   // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
-//   res.setHeader('Access-Control-Allow-Methods', 'GET')
-//   res.setHeader(
-//     'Access-Control-Allow-Headers',
-//     'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-//   )
-//   if (req.method === 'OPTIONS') {
-//     res.status(200).end()
-//     return
-//   }
-//   return await fn(req, res)
-// }
+// const cors = microCors({ allowMethods: ['GET'] })
+const allowCors = fn => async (req, res) => {
+  res.setHeader('Access-Control-Allow-Credentials', true)
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  // another common pattern
+  // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+  res.setHeader('Access-Control-Allow-Methods', 'GET')
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+  )
+  if (req.method === 'OPTIONS') {
+    res.status(200).end()
+    return
+  }
+  return await fn(req, res)
+}
 
 const handler = async (req, res) => {
 
@@ -307,5 +307,5 @@ const handler = async (req, res) => {
   res.status(200).json(result)
 }
 
-module.exports = cors(handler)
-// module.exports = allowCors(handler)
+// module.exports = cors(handler)
+module.exports = allowCors(handler)
