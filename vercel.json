@@ -1,7 +1,7 @@
 {
   "name": "meteo",
   "version": 2,
-  "builds": [{ "src": "**/*.js", "use": "@now/node" }],
+  "builds": [{ "src": "**/*.js", "use": "@vercel/node" }],
   "routes": [
     { "src": "/data", "methods": ["GET", "OPTIONS"], "dest": "data/getDatasets.js" },
     { "src": "/data", "methods": ["POST", "OPTIONS"], "dest": "data/postDataset.js" },
