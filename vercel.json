@@ -3,9 +3,9 @@
   "version": 2,
   "builds": [{ "src": "**/*.js", "use": "@vercel/node" }],
   "routes": [
-    { "src": "/data", "methods": ["GET", "OPTIONS"], "dest": "data/getDatasets.js" },
-    { "src": "/data", "methods": ["POST", "OPTIONS"], "dest": "data/postDataset.js" },
-    { "src": "/", "dest": "/index.js" }
+    { "src": "/data", "methods": ["GET", "OPTIONS"], "dest": "api/getDatasets.js" },
+    { "src": "/data", "methods": ["POST", "OPTIONS"], "dest": "api/postDataset.js" },
+    { "src": "/", "dest": "api/index.js" }
   ],
   "env": {
     "DB_URI": "@db-uri",
@@ -13,7 +13,7 @@
   },
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/api/(.*)",
       "headers": [
         { "key": "Access-Control-Allow-Credentials", "value": "true" },
         { "key": "Access-Control-Allow-Origin", "value": "*" },

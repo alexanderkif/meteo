@@ -1,5 +1,5 @@
 
-const connectToDatabase = require('./data/configDb')
+const connectToDatabase = require('./configDb')
 // const microCors = require('micro-cors')
 
 // const cors = microCors({ allowMethods: ['GET','POST'] })
