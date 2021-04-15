@@ -9,7 +9,6 @@
   "author": "Aleksandr Nikiforov",
   "license": "ISC",
   "dependencies": {
-    "micro-cors": "^0.1.1",
     "mongodb": "^3.2.7"
   },
   "engines": {
