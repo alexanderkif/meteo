@@ -1,5 +1,6 @@
 {
   "name": "meteo",
+  "builds": [{ "src": "**/*.js", "use": "@vercel/node" }],
   "routes": [
     { "src": "/data", "methods": ["GET", "OPTIONS"], "dest": "api/getDatasets.js" },
     { "src": "/data", "methods": ["POST", "OPTIONS"], "dest": "api/postDataset.js" },
@@ -8,16 +9,5 @@
   "env": {
     "DB_URI": "@db-uri",
     "MY_KEY": "@my-key"
-  },
-  "headers": [
-    {
-      "source": "/api/(.*)",
-      "headers": [
-        { "key": "Access-Control-Allow-Credentials", "value": "true" },
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Access-Control-Allow-Methods", "value": "GET,OPTIONS" },
-        { "key": "Access-Control-Allow-Headers", "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" }
-      ]
-    }
-  ]
+  }
 }
