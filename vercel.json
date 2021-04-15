@@ -2,9 +2,9 @@
   "name": "meteo",
   "builds": [{ "src": "**/*.js", "use": "@vercel/node" }],
   "routes": [
-    { "src": "/data", "methods": ["GET", "OPTIONS"], "dest": "api/getDatasets.js" },
-    { "src": "/data", "methods": ["POST", "OPTIONS"], "dest": "api/postDataset.js" },
-    { "src": "/", "dest": "api/index.js" }
+    { "src": "/data", "methods": ["GET", "OPTIONS"], "dest": "data/getDatasets.js" },
+    { "src": "/data", "methods": ["POST", "OPTIONS"], "dest": "data/postDataset.js" },
+    { "src": "/", "dest": "/index.js" }
   ],
   "env": {
     "DB_URI": "@db-uri",
