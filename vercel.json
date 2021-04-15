@@ -1,16 +1,10 @@
 {
   "name": "meteo",
   "builds": [{ "src": "**/*.js", "use": "@vercel/node" }],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "access-control-allow-origin",
-          "value": "*"
-        }
-      ]
-    }
+  "routes": [
+    { "src": "/data", "methods": ["GET", "OPTIONS"], "dest": "data/getDatasets.js" },
+    { "src": "/data", "methods": ["POST", "OPTIONS"], "dest": "data/postDataset.js" },
+    { "src": "/", "dest": "/index.js" }
   ],
   "env": {
     "DB_URI": "@db-uri",
