@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "micro-cors": "^0.1.1",
-    "mongodb": "^3.2.7"
+    "mongodb": "^3.7.4"
   },
   "engines": {
     "node": "12.x"
